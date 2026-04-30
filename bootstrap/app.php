@@ -16,3 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
+
+if (isset($_ENV['VERCEL_URL']) || getenv('VERCEL_URL') || getenv('VERCEL')) {
+    $app->useStoragePath('/tmp/storage');
+}
+
+return $app;
