@@ -14,7 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->reportable(function (\Throwable $e) {
+            echo "<h1>ERROR ASLI:</h1><pre>" . $e->getMessage() . "\n" . $e->getFile() . " on line " . $e->getLine() . "\n\n" . $e->getTraceAsString() . "</pre>";
+            exit;
+        });
     })->create();
 
 if (isset($_ENV['VERCEL_URL']) || getenv('VERCEL_URL') || getenv('VERCEL')) {
