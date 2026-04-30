@@ -18,6 +18,7 @@
             </div>
             @php
                 $isTitleOnly = in_array($indicator->nomor . $indicator->sub_nomor, ['7a', '9a', '14a']);
+                $noEvidence = false; // Add this line to fix the error
             @endphp
             @if(!$isTitleOnly)
                 @include('components.status-badge', ['status' => $response->status ?? 'pending'])
