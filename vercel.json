@@ -19,6 +19,10 @@
             "dest": "/public/build/$1"
         },
         {
+            "src": "/logo.png",
+            "dest": "/public/logo.png"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
