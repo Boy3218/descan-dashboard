@@ -7,7 +7,7 @@
     </div>
 
     <div class="bg-white shadow sm:rounded-lg overflow-hidden">
-        <div class="px-4 py-5 sm:px-6 bg-gray-50 flex justify-between items-center">
+        <div class="px-4 py-5 sm:px-6 bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Indikator {{ $indicator->nomor }}{{ $indicator->sub_nomor }}
@@ -117,7 +117,7 @@
 
                 @if(!$noEvidence)
                 <div class="border-t border-gray-200 pt-6">
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
                         <label class="block text-sm font-medium text-gray-700">Tautan Bukti Dukung & Keterangan</label>
                         <button type="button" id="addUrlBtn" class="text-xs bg-indigo-50 text-indigo-600 hover:bg-indigo-100 font-semibold px-2 py-1 rounded border border-indigo-200">
                             + Tambah Bukti Dukung Lain
@@ -155,14 +155,14 @@
                 </div>
                 @endif
 
-                <div class="flex justify-end pt-4 space-x-3">
+                <div class="flex flex-col sm:flex-row sm:justify-end pt-4 sm:space-x-3 space-y-3 sm:space-y-0 mt-4 border-t border-gray-100">
                     @if(!empty($response->id))
-                    <button type="button" onclick="openDeleteModal()" class="inline-flex justify-center items-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-red-600 bg-white hover:bg-red-50 focus:outline-none">
+                    <button type="button" onclick="openDeleteModal()" class="w-full sm:w-auto inline-flex justify-center items-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-red-600 bg-white hover:bg-red-50 focus:outline-none">
                         <svg class="w-5 h-5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                         Hapus Isian
                     </button>
                     @endif
-                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
+                    <button type="submit" class="w-full sm:w-auto inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
                         Simpan Jawaban
                     </button>
                 </div>
