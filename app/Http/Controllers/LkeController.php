@@ -135,61 +135,61 @@ class LkeController extends Controller
         
         $columns = ['Nama Desa', 'Kecamatan', 'Blok', 'Aspek', 'No', 'Indikator', 'Jawaban', 'Skor', 'Bukti Dukung URL', 'Keterangan', 'Status', 'Catatan Reviewer', 'Waktu Update'];
 
-        $callback = function() use($responses, $columns) {
-            $file = fopen('php://output', 'w');
+        $file = fopen('php://memory', 'w');
+        
+        // Add BOM for UTF-8 Excel support
+        fputs($file, "\xEF\xBB\xBF");
+        fputcsv($file, $columns, ';');
+
+        foreach ($responses as $response) {
+            $indicator = $response->indicator;
+            $desa = $response->desa;
             
-            // Add BOM for UTF-8 Excel support
-            fputs($file, "\xEF\xBB\xBF");
-            fputcsv($file, $columns, ';');
-
-            foreach ($responses as $response) {
-                $indicator = $response->indicator;
-                $desa = $response->desa;
-                
-                $buktiStr = '';
-                $ketStr = '';
-                if (is_array($response->bukti_dukung_url)) {
-                    $urls = $response->bukti_dukung_url;
-                    $kets = is_array($response->keterangan) ? $response->keterangan : [];
-                    $combinedUrls = [];
-                    foreach($urls as $i => $url) {
-                        $k = $kets[$i] ?? '';
-                        if ($k) {
-                            $combinedUrls[] = $url . " (" . $k . ")";
-                        } else {
-                            $combinedUrls[] = $url;
-                        }
+            $buktiStr = '';
+            $ketStr = '';
+            if (is_array($response->bukti_dukung_url)) {
+                $urls = $response->bukti_dukung_url;
+                $kets = is_array($response->keterangan) ? $response->keterangan : [];
+                $combinedUrls = [];
+                foreach($urls as $i => $url) {
+                    $k = $kets[$i] ?? '';
+                    if ($k) {
+                        $combinedUrls[] = $url . " (" . $k . ")";
+                    } else {
+                        $combinedUrls[] = $url;
                     }
-                    $buktiStr = implode(", ", $combinedUrls);
-                    $ketStr = implode(", ", $kets);
-                } else {
-                    $buktiStr = $response->bukti_dukung_url ?? '';
-                    $ketStr = $response->keterangan ?? '';
-                    if (!is_string($ketStr)) $ketStr = '';
                 }
-
-                $row = [
-                    $desa->name ?? 'N/A',
-                    $desa->kecamatan ?? 'N/A',
-                    $indicator->blok ?? '',
-                    $indicator->aspek ?? '',
-                    ($indicator->nomor ?? '') . ($indicator->sub_nomor ?? ''),
-                    $indicator->indikator ?? '',
-                    $response->opsi_terpilih ?? '',
-                    $response->skor ?? 0,
-                    $buktiStr,
-                    $ketStr,
-                    $response->status ?? '',
-                    $response->catatan_reviewer ?? '',
-                    $response->updated_at ? $response->updated_at->format('Y-m-d H:i:s') : ''
-                ];
-
-                fputcsv($file, $row, ';');
+                $buktiStr = implode(", ", $combinedUrls);
+                $ketStr = implode(", ", $kets);
+            } else {
+                $buktiStr = $response->bukti_dukung_url ?? '';
+                $ketStr = $response->keterangan ?? '';
+                if (!is_string($ketStr)) $ketStr = '';
             }
 
-            fclose($file);
-        };
+            $row = [
+                $desa->name ?? 'N/A',
+                $desa->kecamatan ?? 'N/A',
+                $indicator->blok ?? '',
+                $indicator->aspek ?? '',
+                ($indicator->nomor ?? '') . ($indicator->sub_nomor ?? ''),
+                $indicator->indikator ?? '',
+                $response->opsi_terpilih ?? '',
+                $response->skor ?? 0,
+                $buktiStr,
+                $ketStr,
+                $response->status ?? '',
+                $response->catatan_reviewer ?? '',
+                $response->updated_at ? $response->updated_at->format('Y-m-d H:i:s') : ''
+            ];
 
-        return response()->stream($callback, 200, $headers);
+            fputcsv($file, $row, ';');
+        }
+
+        rewind($file);
+        $csvContent = stream_get_contents($file);
+        fclose($file);
+
+        return response($csvContent, 200, $headers);
     }
 }
