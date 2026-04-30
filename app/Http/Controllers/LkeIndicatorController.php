@@ -55,6 +55,11 @@ class LkeIndicatorController extends Controller
         return redirect()->route('lke-indicator.index')->with('success', 'Kuesioner berhasil ditambahkan.');
     }
 
+    public function show(LkeIndicator $lke_indicator)
+    {
+        return redirect()->route('lke-indicator.edit', $lke_indicator->id);
+    }
+
     public function edit(LkeIndicator $lke_indicator)
     {
         return view('lke_indicator.edit', compact('lke_indicator'));
