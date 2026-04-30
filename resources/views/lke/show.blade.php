@@ -59,6 +59,16 @@
             @endif
 
             @if(!$isTitleOnly)
+            @if ($errors->any())
+                <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    <strong class="font-bold">Ada kesalahan:</strong>
+                    <ul class="mt-2 list-disc list-inside text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('lke.update', $indicator->id) }}" method="POST" class="space-y-6">
                 @csrf
                 <input type="hidden" name="desa_id" value="{{ $selectedDesaId }}">
@@ -121,7 +131,14 @@
                         @foreach($urls as $index => $url)
                         <div class="flex items-start space-x-2 url-row bg-gray-50 p-3 rounded-md border border-gray-100">
                             <div class="flex-grow space-y-2">
-                                <input type="url" name="bukti_dukung_url[]" value="{{ $url }}" placeholder="https://..." class="border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border rounded-md p-2">
+                                <div class="flex items-center space-x-2">
+                                    <input type="url" name="bukti_dukung_url[]" value="{{ $url }}" placeholder="https://..." class="border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border rounded-md p-2">
+                                    @if(!empty($url))
+                                        <a href="{{ $url }}" target="_blank" class="inline-flex items-center text-indigo-600 hover:text-indigo-900 bg-indigo-100 p-2 rounded-md border border-indigo-200" title="Buka Tautan Ini">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        </a>
+                                    @endif
+                                </div>
                                 <input type="text" name="keterangan[]" value="{{ $keterangans[$index] ?? '' }}" placeholder="Keterangan dokumen ini (misal: SK Kades 2024)" class="border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border rounded-md p-2">
                             </div>
                             <button type="button" class="text-red-500 hover:text-red-700 remove-url-btn mt-2 {{ $index == 0 ? 'invisible' : '' }}" title="Hapus Tautan">
