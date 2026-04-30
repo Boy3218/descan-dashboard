@@ -16,7 +16,6 @@ class LkeController extends Controller
         $selectedDesaId = $request->query('desa_id', $desas->first()->id ?? null);
         
         $indicators = LkeIndicator::orderBy('urutan')
-            ->where('blok', '!=', 'V')
             ->with(['responses' => function($q) use ($selectedDesaId) {
                 $q->where('desa_id', $selectedDesaId);
             }])->get();
