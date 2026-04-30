@@ -19,7 +19,7 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Indikator (Pertanyaan)</th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Opsi</th>
-                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_6px_-1px_rgba(0,0,0,0.05)]">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -46,7 +46,7 @@
                                 <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">{{ count($indicator->opsi_jawaban ?? []) }} Pilihan</span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2 sticky right-0 bg-white z-10 shadow-[-4px_0_6px_-1px_rgba(0,0,0,0.05)]">
                             <a href="{{ route('lke-indicator.edit', $indicator->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             <form action="{{ route('lke-indicator.destroy', $indicator->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus indikator ini? Ini juga akan menghapus semua jawaban yang terkait!');">
                                 @csrf
