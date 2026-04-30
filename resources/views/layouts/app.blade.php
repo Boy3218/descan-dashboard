@@ -15,8 +15,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="font-bold text-xl">✨ Desa Cantik</span>
+                    <div class="flex-shrink-0 flex items-center space-x-3">
+                        <img src="{{ asset('logo.png') }}" alt="Logo Desa Cantik" class="h-10 w-auto bg-white p-1 rounded-md shadow-sm">
+                        <div class="flex flex-col justify-center">
+                            <span class="font-bold text-xl leading-none">Desa Cantik</span>
+                            <span class="text-[0.65rem] font-bold tracking-widest text-indigo-200 mt-1 uppercase">Kab. Pangandaran</span>
+                        </div>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                         <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'border-b-2 border-white' : 'text-indigo-100 hover:text-white' }} inline-flex items-center px-1 pt-1 text-sm font-medium">Dashboard</a>

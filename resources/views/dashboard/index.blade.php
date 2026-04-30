@@ -4,9 +4,15 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="px-4 py-6 sm:px-0">
-    <div class="text-center mb-8 bg-gradient-to-r from-indigo-600 to-purple-700 rounded-2xl p-10 text-white shadow-xl">
-        <h1 class="text-4xl font-extrabold tracking-tight mb-2">Monitoring Desa Cantik 2026</h1>
-        <p class="text-xl font-medium opacity-90">Dashboard Perkembangan Pengisian LKE Mandiri</p>
+    <div class="text-center mb-8 bg-gradient-to-r from-indigo-600 to-purple-700 rounded-2xl p-10 text-white shadow-xl flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+        <img src="{{ asset('logo.png') }}" alt="Logo Desa Cantik" class="h-32 w-auto bg-white p-2 rounded-xl shadow-lg transform rotate-[-2deg] hover:rotate-0 transition">
+        <div class="text-center sm:text-left">
+            <div class="inline-block bg-white/20 px-3 py-1 rounded-full text-sm font-bold tracking-widest uppercase mb-3 border border-white/30 backdrop-blur-sm">
+                Kabupaten Pangandaran
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight mb-2">Monitoring Desa Cantik 2026</h1>
+            <p class="text-xl font-medium opacity-90">Dashboard Perkembangan Pengisian LKE Mandiri</p>
+        </div>
     </div>
 
     <div class="mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center bg-white p-5 rounded-xl shadow-md border border-gray-100">
