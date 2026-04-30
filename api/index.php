@@ -4,6 +4,10 @@
  * Forward Vercel requests to the normal Laravel index.php
  */
 
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
+
 putenv('VIEW_COMPILED_PATH=/tmp');
 putenv('APP_CONFIG_CACHE=/tmp/config.php');
 putenv('APP_EVENTS_CACHE=/tmp/events.php');
