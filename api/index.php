@@ -4,6 +4,9 @@
  * Forward Vercel requests to the normal Laravel index.php
  */
 
+echo "Hello dari Vercel! Jika tulisan ini muncul, berarti Vercel PHP berfungsi dengan baik dan error-nya ada di dalam sistem Laravel.";
+exit;
+
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
